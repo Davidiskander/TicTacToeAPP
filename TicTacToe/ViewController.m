@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonC1;
 @property (weak, nonatomic) IBOutlet UIButton *buttonC2;
 
+@property (weak, nonatomic) IBOutlet UILabel *turnLabel;
 
 @property NSArray *tiles;
 @property BOOL isXTurn;
@@ -34,27 +35,36 @@
 @implementation ViewController
 
 
+// User playing
 - (IBAction)onButtonPress:(UIButton *)sender {
+    NSLog(@"Button pressed: %@", [sender currentTitle]);
+    [self setButtonLabel:sender];
+    [self changeTurn];
+    
 }
 
+
+-(NSString *)playerMark{
+    if (self.isXTurn) {
+        return @"X";
+    } else {
+        return @"O";
+    }
+}
 
 - (void)setButtonLabel:(UIButton *)button {
 
     // set label
-    NSString *title;
-    if (self.isXTurn) {
-        title = @"X";
-    } else {
-        title = @"O";
-    }
-    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitle:[self playerMark] forState:UIControlStateNormal];
 
     // disable button
     button.enabled = NO;
 }
 
+
 - (void)changeTurn {
     self.isXTurn = ! self.isXTurn;
+    self.turnLabel.text = [self playerMark];
 }
 
 - (void)viewDidLoad {
