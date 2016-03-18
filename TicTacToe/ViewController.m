@@ -43,20 +43,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.resetButton setEnabled:NO];  //Enable if Game is Over
+    [self.resetButton setHidden:YES];  //NOT hidden if Game is Over
     self.isXTurn = YES;
+    // initialize tile grid
     self.tiles =
     @[
       @[self.buttonA0, self.buttonA1, self.buttonA2],
       @[self.buttonB0, self.buttonB1, self.buttonB2],
       @[self.buttonC0, self.buttonC1, self.buttonC2]
       ];
+
     
-    for (int x = 0; x < 3; x++) {
-        for (int y = 0; y < 3; y++) {
+    for (int x = 0; x < self.tiles.count; x++) {
+        for (int y = 0; y < self.tiles.count; y++) {
             UIButton *button = self.tiles[x][y];
-            
-            
+            button.backgroundColor = [UIColor redColor];
+
             NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
             [button setTitle:myName forState:UIControlStateNormal];
             //NSLog([NSString stringWithFormat:@"%i, %i", x, y]);
@@ -84,10 +86,8 @@
 }
 
 - (void)setButtonLabel:(UIButton *)button {
-
     // set label
     [button setTitle:[self playerMark] forState:UIControlStateNormal];
-
     // disable button
     button.enabled = NO;
 }
@@ -100,12 +100,23 @@
 
 
 
-//-endGame
+- (void) endGame {
+    //NSString *winnerStatment = [NSString stringWithFormat:@"The winner is %@\n just saying .. %@ sucks!", CHANGE ME, CHANGE ME]
+    //[self.winnerName.text = winnerStatment];
+}
 
 
 - (IBAction)resetGame:(UIButton *)sender {
-    
+    for (int x = 0; x < self.tiles.count; x++) {
+        for (int y = 0; y < self.tiles.count; y++) {
+            UIButton *button = self.tiles[x][y];
+            button.enabled = YES;
+        }
+    }
+    self.winnerName.text = nil;
 }
+
+            
 
 
 @end
