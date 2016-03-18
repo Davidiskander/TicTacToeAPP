@@ -66,7 +66,7 @@
                                     <action selector="onButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hfu-Mz-Fuc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="api-7X-2x7">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="api-7X-2x7" colorLabel="IBBuiltInLabel-Red">
                                 <rect key="frame" x="364" y="78" width="70" height="30"/>
                                 <state key="normal" title="Button C0"/>
                                 <connections>
@@ -87,22 +87,39 @@
                                     <action selector="onButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VT8-8q-2k1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsX-9g-HAW">
+                                <rect key="frame" x="20" y="525" width="560" height="30"/>
+                                <state key="normal" title="Reset Game"/>
+                                <connections>
+                                    <action selector="resetGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kbe-Os-437"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hq3-Os-vxp">
+                                <rect key="frame" x="20" y="464" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="e1J-Vj-SXo" secondAttribute="trailing" id="4YL-ki-nXu"/>
                             <constraint firstItem="zje-R6-w7I" firstAttribute="height" secondItem="eei-R7-9BK" secondAttribute="height" id="63f-6n-pbK"/>
                             <constraint firstItem="tfK-YH-HnT" firstAttribute="width" secondItem="eei-R7-9BK" secondAttribute="width" id="7ea-3e-wMg"/>
+                            <constraint firstItem="AsX-9g-HAW" firstAttribute="top" secondItem="hq3-Os-vxp" secondAttribute="bottom" constant="40" id="AFW-Gz-aSx"/>
                             <constraint firstItem="tfK-YH-HnT" firstAttribute="leading" secondItem="zje-R6-w7I" secondAttribute="trailing" id="AUS-RV-Gj0"/>
                             <constraint firstItem="e1J-Vj-SXo" firstAttribute="width" secondItem="eei-R7-9BK" secondAttribute="width" id="AW6-2A-HVy"/>
                             <constraint firstItem="api-7X-2x7" firstAttribute="leading" secondItem="gaF-lq-M52" secondAttribute="trailing" id="BUA-XH-eDt"/>
                             <constraint firstAttribute="trailing" secondItem="api-7X-2x7" secondAttribute="trailing" id="Bt0-Md-km3"/>
                             <constraint firstItem="taK-5H-dOl" firstAttribute="height" secondItem="eei-R7-9BK" secondAttribute="height" id="FD5-1n-HzP"/>
+                            <constraint firstItem="AsX-9g-HAW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Hcg-XJ-8GX"/>
                             <constraint firstItem="oLI-cD-WQW" firstAttribute="width" secondItem="eei-R7-9BK" secondAttribute="width" id="HsE-CL-YbR"/>
+                            <constraint firstItem="hq3-Os-vxp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="I60-fW-u1l"/>
                             <constraint firstItem="ugc-NO-5Fr" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="I6m-x8-iDz"/>
                             <constraint firstItem="gaF-lq-M52" firstAttribute="leading" secondItem="eei-R7-9BK" secondAttribute="trailing" constant="99" id="IqF-Ck-umf"/>
                             <constraint firstItem="gaF-lq-M52" firstAttribute="height" secondItem="eei-R7-9BK" secondAttribute="height" id="Lzg-3L-HRs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ugc-NO-5Fr" secondAttribute="trailing" constant="-20" id="Mlr-Ew-KHw"/>
+                            <constraint firstItem="AsX-9g-HAW" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="OzJ-BG-MqA"/>
                             <constraint firstItem="tfK-YH-HnT" firstAttribute="leading" secondItem="zje-R6-w7I" secondAttribute="trailing" constant="91" id="QYY-5T-bvi"/>
                             <constraint firstItem="zje-R6-w7I" firstAttribute="leading" secondItem="oLI-cD-WQW" secondAttribute="trailing" id="R6k-VL-fZx"/>
                             <constraint firstItem="ugc-NO-5Fr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="SNh-bX-WVI"/>
@@ -116,6 +133,7 @@
                             <constraint firstItem="api-7X-2x7" firstAttribute="height" secondItem="eei-R7-9BK" secondAttribute="height" id="aRI-HM-myG"/>
                             <constraint firstItem="oLI-cD-WQW" firstAttribute="height" secondItem="eei-R7-9BK" secondAttribute="height" id="agE-rj-xlf"/>
                             <constraint firstItem="oLI-cD-WQW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="b4e-sM-T6g"/>
+                            <constraint firstItem="hq3-Os-vxp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="c2y-4q-uu5"/>
                             <constraint firstItem="H4f-y5-sTo" firstAttribute="width" secondItem="eei-R7-9BK" secondAttribute="width" id="dmH-5I-UMO"/>
                             <constraint firstItem="zje-R6-w7I" firstAttribute="leading" secondItem="oLI-cD-WQW" secondAttribute="trailing" constant="91" id="fIL-y0-TR6"/>
                             <constraint firstItem="taK-5H-dOl" firstAttribute="leading" secondItem="H4f-y5-sTo" secondAttribute="trailing" constant="102" id="fN6-Ka-Q5a"/>
@@ -126,6 +144,7 @@
                             <constraint firstItem="taK-5H-dOl" firstAttribute="leading" secondItem="H4f-y5-sTo" secondAttribute="trailing" id="lun-Mu-NuR"/>
                             <constraint firstItem="api-7X-2x7" firstAttribute="leading" secondItem="gaF-lq-M52" secondAttribute="trailing" constant="84" id="n58-9e-gOp"/>
                             <constraint firstItem="zje-R6-w7I" firstAttribute="width" secondItem="eei-R7-9BK" secondAttribute="width" id="oep-fS-w35"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AsX-9g-HAW" secondAttribute="bottom" constant="45" id="rYO-h7-hKA"/>
                             <constraint firstItem="e1J-Vj-SXo" firstAttribute="leading" secondItem="taK-5H-dOl" secondAttribute="trailing" constant="88" id="upE-aW-wIn"/>
                         </constraints>
                     </view>
@@ -139,7 +158,9 @@
                         <outlet property="buttonC0" destination="api-7X-2x7" id="6ED-7V-Q3C"/>
                         <outlet property="buttonC1" destination="e1J-Vj-SXo" id="TcD-79-EA9"/>
                         <outlet property="buttonC2" destination="tfK-YH-HnT" id="vfP-JV-WzX"/>
+                        <outlet property="resetButton" destination="AsX-9g-HAW" id="A5x-LB-psY"/>
                         <outlet property="turnLabel" destination="ugc-NO-5Fr" id="2WB-Hv-79T"/>
+                        <outlet property="winnerName" destination="hq3-Os-vxp" id="gXh-0R-Vra"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
