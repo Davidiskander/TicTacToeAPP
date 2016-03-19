@@ -58,14 +58,10 @@
 		19C9C8531C9B64D6003FEC78 /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
-				19C9C8571C9B64D6003FEC78 /* AppDelegate.h */,
-				19C9C8581C9B64D6003FEC78 /* AppDelegate.m */,
+				19C9C85D1C9B64D6003FEC78 /* Main.storyboard */,
 				19C9C85A1C9B64D6003FEC78 /* ViewController.h */,
 				19C9C85B1C9B64D6003FEC78 /* ViewController.m */,
-				19C9C85D1C9B64D6003FEC78 /* Main.storyboard */,
 				19C9C8601C9B64D6003FEC78 /* Assets.xcassets */,
-				19C9C8621C9B64D6003FEC78 /* LaunchScreen.storyboard */,
-				19C9C8651C9B64D6003FEC78 /* Info.plist */,
 				19C9C8541C9B64D6003FEC78 /* Supporting Files */,
 			);
 			path = TicTacToe;
@@ -74,6 +70,10 @@
 		19C9C8541C9B64D6003FEC78 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				19C9C8571C9B64D6003FEC78 /* AppDelegate.h */,
+				19C9C8581C9B64D6003FEC78 /* AppDelegate.m */,
+				19C9C8621C9B64D6003FEC78 /* LaunchScreen.storyboard */,
+				19C9C8651C9B64D6003FEC78 /* Info.plist */,
 				19C9C8551C9B64D6003FEC78 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -299,6 +299,7 @@
 				19C9C86A1C9B64D6003FEC78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

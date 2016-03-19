@@ -14,23 +14,54 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonA0;
 @property (weak, nonatomic) IBOutlet UIButton *buttonA1;
 @property (weak, nonatomic) IBOutlet UIButton *buttonA2;
+@property (weak, nonatomic) IBOutlet UIButton *buttonA3;
+@property (weak, nonatomic) IBOutlet UIButton *buttonA4;
 
 //2nd coulmn of buttons
 @property (weak, nonatomic) IBOutlet UIButton *buttonB0;
 @property (weak, nonatomic) IBOutlet UIButton *buttonB1;
 @property (weak, nonatomic) IBOutlet UIButton *buttonB2;
+@property (weak, nonatomic) IBOutlet UIButton *buttonB3;
+@property (weak, nonatomic) IBOutlet UIButton *buttonB4;
 
 //3rd coulmn of buttons
 @property (weak, nonatomic) IBOutlet UIButton *buttonC0;
 @property (weak, nonatomic) IBOutlet UIButton *buttonC1;
 @property (weak, nonatomic) IBOutlet UIButton *buttonC2;
+@property (weak, nonatomic) IBOutlet UIButton *buttonC3;
+@property (weak, nonatomic) IBOutlet UIButton *buttonC4;
+
+//4th coulmn of buttons
+@property (weak, nonatomic) IBOutlet UIButton *buttonD0;
+@property (weak, nonatomic) IBOutlet UIButton *buttonD1;
+@property (weak, nonatomic) IBOutlet UIButton *buttonD2;
+@property (weak, nonatomic) IBOutlet UIButton *buttonD3;
+@property (weak, nonatomic) IBOutlet UIButton *buttonD4;
+
+//5th coulmn of buttons
+@property (weak, nonatomic) IBOutlet UIButton *buttonE0;
+@property (weak, nonatomic) IBOutlet UIButton *buttonE1;
+@property (weak, nonatomic) IBOutlet UIButton *buttonE2;
+@property (weak, nonatomic) IBOutlet UIButton *buttonE3;
+@property (weak, nonatomic) IBOutlet UIButton *buttonE4;
+
+// Stack views
+@property (weak, nonatomic) IBOutlet UIStackView *colomn0;
+@property (weak, nonatomic) IBOutlet UIStackView *colomn1;
+@property (weak, nonatomic) IBOutlet UIStackView *colomn2;
+@property (weak, nonatomic) IBOutlet UIStackView *colomn3;
+@property (weak, nonatomic) IBOutlet UIStackView *colomn4;
 
 @property (weak, nonatomic) IBOutlet UILabel *turnLabel;
 @property (weak, nonatomic) IBOutlet UILabel *winnerName;
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameMode;
+@property (weak, nonatomic) IBOutlet UIButton *startGame;
+
 
 @property NSArray *tiles;
 @property BOOL isXTurn;
+
 
 @end
 
@@ -44,17 +75,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.resetButton setHidden:YES];
+    [self.startGame setHidden: NO];
 
+    
+    self.colomn0.hidden = YES;
+    self.colomn1.hidden = YES;
+    self.colomn2.hidden = YES;
+    self.colomn3.hidden = YES;
+    self.colomn4.hidden = YES;
 
     self.isXTurn = YES;
-    self.turnLabel.text = @"Player 1";
     
     // initialize tile grid
     self.tiles =
     @[
-      @[self.buttonA0, self.buttonA1, self.buttonA2],
-      @[self.buttonB0, self.buttonB1, self.buttonB2],
-      @[self.buttonC0, self.buttonC1, self.buttonC2]
+      @[self.buttonA0, self.buttonA1, self.buttonA2, self.buttonA3, self.buttonA4],
+      @[self.buttonB0, self.buttonB1, self.buttonB2, self.buttonB3, self.buttonB4],
+      @[self.buttonC0, self.buttonC1, self.buttonC2, self.buttonC3, self.buttonC4],
+      @[self.buttonD0, self.buttonD1, self.buttonD2, self.buttonD3, self.buttonD4],
+      @[self.buttonE0, self.buttonE1, self.buttonE2, self.buttonE3, self.buttonE4]
       ];
 
     
@@ -66,20 +105,66 @@
 //            NSString *myName = [NSString stringWithFormat:@""];
 //            [button setTitle:myName forState:UIControlStateNormal];
 
-            NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
-            [button setTitle:myName forState:UIControlStateNormal];
+            //NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
+            //[button setTitle:myName forState:UIControlStateNormal];
             //NSLog([NSString stringWithFormat:@"%i, %i", x, y]);
+            //[button  setTitle:stringWithFormat:@"a" forState:<#(UIControlState)#>];
+
         }
     }
     
 }
 
+
+- (IBAction)gameModeButtonPressed:(UISegmentedControl *)sender {
+   
+    }
+
+
+- (IBAction)onGameStartPressed:(UIButton *)sender {
+    self.startGame.hidden = YES;
+    self.gameMode.enabled = NO;
+    self.turnLabel.text = @"Player 1";
+
+    if (self.gameMode.selectedSegmentIndex == 0) {
+        //do stuff;
+        NSLog(@"3x3");
+        self.colomn0.hidden = NO;
+        self.colomn1.hidden = NO;
+        self.colomn2.hidden = NO;
+        self.buttonD0.hidden = self.buttonD1.hidden = self.buttonD2.hidden = YES;
+        self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = YES;
+        self.buttonE3.hidden = NO;
+        
+        
+    } else if(self.gameMode.selectedSegmentIndex == 1) {
+        // do stuff;
+        NSLog(@"4x4");
+        self.colomn0.hidden = NO;
+        self.colomn1.hidden = NO;
+        self.colomn2.hidden = NO;
+        self.colomn3.hidden = NO;
+        self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = self.buttonE3.hidden = YES;
+        
+    } else if(self.gameMode.selectedSegmentIndex == 2) {
+        // do nothing;
+        NSLog(@"5x5");
+        self.colomn0.hidden = NO;
+        self.colomn1.hidden = NO;
+        self.colomn2.hidden = NO;
+        self.colomn3.hidden = NO;
+        self.colomn4.hidden = NO;
+}
+}
+
+
+
 // User playing
 - (IBAction)onButtonPress:(UIButton *)sender {
     NSLog(@"Button pressed: %@", [sender currentTitle]);
     [self setButtonTitle:sender];
-//    UIButton *button = sender;
-//    button.backgroundColor = [UIColor blueColor];
+    UIButton *button = sender;
+    button.backgroundColor = [UIColor orangeColor];
 
     
     //isGameOver
