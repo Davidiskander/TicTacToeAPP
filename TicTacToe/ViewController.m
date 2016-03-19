@@ -75,9 +75,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.resetButton setHidden:YES];
-    [self.startGame setHidden: NO];
-
+    
     
     self.colomn0.hidden = YES;
     self.colomn1.hidden = YES;
@@ -85,7 +83,6 @@
     self.colomn3.hidden = YES;
     self.colomn4.hidden = YES;
 
-    self.isXTurn = YES;
     
     // initialize tile grid
     self.numTiles = 3;
@@ -100,29 +97,24 @@
     
     // reset game
     [self resetGame:nil];
-    
-    // debug tile labels
-    int N = self.numTiles;
-    for (int x = 0; x < N; x++) {
-        for (int y = 0; y < N; y++) {
-            UIButton *button = self.tiles[x][y];
-        }
-    }
+
+    // show start button
+    [self.startGame setHidden: NO];
 }
 
 - (IBAction)resetGame:(UIButton *)sender
 {
-    // reset buttons
+    // clear tiles
     for (int x = 0; x < self.tiles.count; x++) {
         for (int y = 0; y < self.tiles.count; y++) {
             UIButton *button = self.tiles[x][y];
             NSLog(@"enabling %i, %i", x, y);
             
-            // make button active
+            // make tile active
             button.enabled = YES;
             button.userInteractionEnabled = YES;
             
-            // reset button label
+            // reset tile label
             NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
             [self setButtonTitle:button to:nil];
             button.backgroundColor = [UIColor grayColor];
@@ -141,47 +133,48 @@
     
     // hide reset button
     [self.resetButton setHidden:YES];
+    
+    // show game mode
+//    [self.startGame setHidden: NO];
+//    self.gameMode.enabled = YES;
 }
 
 
 - (IBAction)gameModeButtonPressed:(UISegmentedControl *)sender {
    
-    }
+}
 
 
 - (IBAction)onGameStartPressed:(UIButton *)sender {
     self.startGame.hidden = YES;
     self.gameMode.enabled = NO;
-    self.turnLabel.text = @"Player 1";
 
     if (self.gameMode.selectedSegmentIndex == 0) {
-        //do stuff;
         NSLog(@"3x3");
+        self.numTiles = 3;
         self.colomn0.hidden = NO;
         self.colomn1.hidden = NO;
         self.colomn2.hidden = NO;
         self.buttonD0.hidden = self.buttonD1.hidden = self.buttonD2.hidden = YES;
         self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = YES;
         self.buttonE3.hidden = NO;
-        
-        
     } else if(self.gameMode.selectedSegmentIndex == 1) {
-        // do stuff;
         NSLog(@"4x4");
+        self.numTiles = 4;
         self.colomn0.hidden = NO;
         self.colomn1.hidden = NO;
         self.colomn2.hidden = NO;
         self.colomn3.hidden = NO;
         self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = self.buttonE3.hidden = YES;
-        
     } else if(self.gameMode.selectedSegmentIndex == 2) {
         NSLog(@"5x5");
+        self.numTiles = 5;
         self.colomn0.hidden = NO;
         self.colomn1.hidden = NO;
         self.colomn2.hidden = NO;
         self.colomn3.hidden = NO;
         self.colomn4.hidden = NO;
-}
+    }
 }
 
 
@@ -204,27 +197,27 @@
     NSString *title = [self getButtonTitle:button];
 
     if ([title isEqualToString:@"X"]) {
-        UIColor *color = [UIColor blueColor];
-        [button setTitleColor:color forState:[button state]];
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateDisabled];
     } else if ([title isEqualToString:@"O"]) {
-        UIColor *color = [UIColor redColor];
-        [button setTitleColor:color forState:[button state]];
+        [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor redColor] forState:UIControlStateDisabled];
     }
 }
 
 - (IBAction)onButtonPress:(UIButton *)button {
     NSLog(@"Button pressed: %@", [button currentTitle]);
 
-    // make button inactive
+    // make tile inactive
     button.enabled = NO;
     button.userInteractionEnabled = YES;
-    // change button title
+    // change tile label
     [self setButtonTitle:button to:[self playerMark]];
-    // change button color
+    // change tile color
     [self colorButton:button];
 
 
-    // isGameOver
+    // check if won
     if ([self isGameOver]) {
         NSLog(@"GAME OVER");
         [self.resetButton setHidden:NO];
@@ -238,7 +231,7 @@
         }
     }
     
-    //winner = sender
+    // next player's turn
     [self changeTurn];
 }
 
