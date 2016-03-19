@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 
 @property NSArray *tiles;
+@property int numTiles;
 @property BOOL isXTurn;
 
 @end
@@ -43,46 +44,100 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.resetButton setHidden:YES];
 
-
-    self.isXTurn = YES;
-    self.turnLabel.text = @"Player 1";
-    
     // initialize tile grid
+    self.numTiles = 3;
     self.tiles =
     @[
       @[self.buttonA0, self.buttonA1, self.buttonA2],
       @[self.buttonB0, self.buttonB1, self.buttonB2],
       @[self.buttonC0, self.buttonC1, self.buttonC2]
-      ];
-
+    ];
     
+    // reset game
+    [self resetGame:nil];
+    
+    // debug tile labels
+    int N = self.numTiles;
+    for (int x = 0; x < N; x++) {
+        for (int y = 0; y < N; y++) {
+            UIButton *button = self.tiles[x][y];
+        }
+    }
+}
+
+- (IBAction)resetGame:(UIButton *)sender
+{
+    // reset buttons
     for (int x = 0; x < self.tiles.count; x++) {
         for (int y = 0; y < self.tiles.count; y++) {
             UIButton *button = self.tiles[x][y];
-            button.backgroundColor = [UIColor grayColor];
-//
-//            NSString *myName = [NSString stringWithFormat:@""];
-//            [button setTitle:myName forState:UIControlStateNormal];
+            NSLog(@"enabling %i, %i", x, y);
+            
+            // make button active
+            button.enabled = YES;
+            button.userInteractionEnabled = YES;
 
+            // reset button label
             NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
-            [button setTitle:myName forState:UIControlStateNormal];
-            //NSLog([NSString stringWithFormat:@"%i, %i", x, y]);
+            [self setButtonTitle:button to:nil];
+            button.backgroundColor = [UIColor grayColor];
         }
     }
     
+    // show turn label
+    self.turnLabel.text = @"Player 1";
+    self.turnLabel.hidden = NO;
+
+    // set turn counter
+    self.isXTurn = YES;
+    
+    // hide winner label
+    self.winnerName.text = nil;
+    
+    // hide reset button
+    [self.resetButton setHidden:YES];
 }
 
-// User playing
-- (IBAction)onButtonPress:(UIButton *)sender {
-    NSLog(@"Button pressed: %@", [sender currentTitle]);
-    [self setButtonTitle:sender];
-//    UIButton *button = sender;
-//    button.backgroundColor = [UIColor blueColor];
 
-    
-    //isGameOver
+#pragma mark -
+#pragma mark - Buttons
+
+
+- (NSString *)getButtonTitle:(UIButton *)button {
+    return [button titleForState:[button state]];
+}
+
+- (void)setButtonTitle:(UIButton *)button to:(NSString *)title {
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitle:title forState:UIControlStateDisabled];
+}
+
+- (void)colorButton:(UIButton *)button {
+    NSString *title = [self getButtonTitle:button];
+
+    if ([title isEqualToString:@"X"]) {
+        UIColor *color = [UIColor blueColor];
+        [button setTitleColor:color forState:[button state]];
+    } else if ([title isEqualToString:@"O"]) {
+        UIColor *color = [UIColor redColor];
+        [button setTitleColor:color forState:[button state]];
+    }
+}
+
+- (IBAction)onButtonPress:(UIButton *)button {
+    NSLog(@"Button pressed: %@", [button currentTitle]);
+
+    // make button inactive
+    button.enabled = NO;
+    button.userInteractionEnabled = YES;
+    // change button title
+    [self setButtonTitle:button to:[self playerMark]];
+    // change button color
+    [self colorButton:button];
+
+
+    // isGameOver
     if ([self isGameOver]) {
         NSLog(@"GAME OVER");
         [self.resetButton setHidden:NO];
@@ -95,6 +150,7 @@
             }
         }
     }
+    
     //winner = sender
     [self changeTurn];
 }
@@ -109,63 +165,30 @@
 }
 
 - (void)changeTurn {
+    // increment turn
     self.isXTurn = ! self.isXTurn;
-    self.turnLabel.text = [self playerMark];
-    
-    if ([self.playerMark isEqualToString:@"X"]) {
-        self.turnLabel.text = @"Player 1";
-    }
-    else{
-        self.turnLabel.text = @"Player 2";
+
+    // set player label
+    NSString *mark = [self playerMark];
+    if ([mark isEqualToString:@"X"]) {
+        self.turnLabel.text = @"Player 1 (X)";
+    } else{
+        self.turnLabel.text = @"Player 2 (O)";
     }
 }
 
 
 
 - (void) endGame {
+    NSLog(@"endGame(): %@", self.winnerName.text);
+
+    // show winner label
+    
+    // set winner text
     NSString *winnerStatment = [NSString stringWithFormat:@"%@ won!", self.turnLabel.text];
     self.winnerName.text = winnerStatment;
-    NSLog(@"%@", self.winnerName.text);
 }
 
-
-- (IBAction)resetGame:(UIButton *)sender {
-    for (int x = 0; x < self.tiles.count; x++) {
-        for (int y = 0; y < self.tiles.count; y++) {
-            
-            UIButton *button = self.tiles[x][y];
-            NSLog(@"enabling %@", button.titleLabel.text);
-            button.enabled = YES;
-            button.userInteractionEnabled = YES;
-            
-            NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
-            [button setTitle:myName forState:UIControlStateNormal];
-            
-            
-        }
-    }
-    self.winnerName.text = nil;
-    [self.resetButton setHidden:YES];
-    self.turnLabel.text = @"Player 1";
-    self.turnLabel.hidden = NO;
-}
-
-            
-- (NSString *)getButtonTitle:(UIButton *)button {
-    return [button titleForState:[button state]];
-}
-
-
-
-- (void)setButtonTitle:(UIButton *)button {
-    
-    // set label
-    [button setTitle:[self playerMark] forState:UIControlStateNormal];
-    [button setTitle:[self playerMark] forState:UIControlStateDisabled];
-    
-    // disable button
-    button.enabled = NO;
-}
 
 
 #pragma mark -
@@ -173,7 +196,7 @@
 
 
 - (BOOL)isGameOver {
-    int n = self.tiles.count;
+    int n = self.numTiles;
     
     // check each row
     for (int i = 0; i < n; i++) {
@@ -194,84 +217,118 @@
 }
 
 - (BOOL)isWinningRow:(int)y {
+    NSLog(@"isWinningRow");
     UIButton *firstButton = self.tiles[0][y];
     NSString *first = [self getButtonTitle:firstButton];
-    if (! first) { return NO; }
+    if (! first) { NSLog(@"0,%i blank", y); return NO; }
+    NSLog(@"0,%i %@", y, first);
     
-    int n = self.tiles.count;
+    int n = self.numTiles;
     for (int x = 1; x < n; x++) {
         UIButton *otherButton = self.tiles[x][y];
         NSString *other = [self getButtonTitle:otherButton];
         if ([other isEqualToString:first]) {
             // match: keep checking
+            NSLog(@"%i,%i %@ match", x, y, other);
         } else {
             // different: not a winner
+            NSLog(@"%i,%i %@ no", x, y, other);
             return NO;
         }
     }
     // all tiles matched: winner
+    NSLog(@"=> winning row!");
     return YES;
 }
 
 - (BOOL)isWinningColumn:(int)x {
+    NSLog(@"isWinningRow");
     UIButton *firstButton = self.tiles[x][0];
     NSString *first = [self getButtonTitle:firstButton];
-    if (! first) { return NO; }
+    if (! first) { NSLog(@"%i,0 blank", x); return NO; }
+    NSLog(@"%i,0 %@", x, first);
     
-    int n = self.tiles.count;
+    int n = self.numTiles;
     for (int y = 1; y < n; y++) {
         UIButton *otherButton = self.tiles[x][y];
         NSString *other = [self getButtonTitle:otherButton];
         if ([other isEqualToString:first]) {
             // match: keep checking
+            NSLog(@"%i,%i %@ match", x, y, other);
         } else {
             // different: not a winner
+            NSLog(@"%i,%i %@ no", x, y, other);
             return NO;
         }
     }
     // all tiles matched: winner
+    NSLog(@"=> winning column!");
     return YES;
 }
 
-// diagonal #1: (0,0) to (2,2)
+// diagonal NE: (0,0) - (1,1) - (2,2) = (i,i)
 - (BOOL)isWinningDiagSoutheast {
-    UIButton *firstButton = self.tiles[0][0];
+    NSLog(@"isWinningDiagSE");
+
+    // first
+    int x = 0;
+    int y = 0;
+    UIButton *firstButton = self.tiles[x][y];
     NSString *first = [self getButtonTitle:firstButton];
-    if (! first) { return NO; }
-    
-    int n = self.tiles.count;
+    if (! first) { NSLog(@"%i,%i blank", x, y); return NO; }
+    NSLog(@"%i,%i %@", x, y, first);
+
+    // others
+    int n = self.numTiles;
     for (int xy = 1; xy < n; xy++) {
-        UIButton *otherButton = self.tiles[xy][xy];
+        x = xy;
+        y = xy;
+        UIButton *otherButton = self.tiles[x][y];
         NSString *other = [self getButtonTitle:otherButton];
         if ([other isEqualToString:first]) {
             // match: keep checking
+            NSLog(@"%i,%i %@ match", x, y, other);
         } else {
             // different: not a winner
+            NSLog(@"%i,%i %@ no", x, y, other);
             return NO;
         }
     }
     // all tiles matched: winner
+    NSLog(@"=> winning diag SE!");
     return YES;
 }
 
-// diagonal #1: (0,0) to (2,2)
+// diagonal NE: (0,2) - (1,1) - (2,0) = (i,n-1-i)
 - (BOOL)isWinningDiagNortheast {
-    int n = self.tiles.count;
-    UIButton *firstButton = self.tiles[n-1][0];
+    NSLog(@"isWinningDiagNE");
+
+    // first
+    int n = self.numTiles;
+    int x = 0;
+    int y = n-1;
+    UIButton *firstButton = self.tiles[x][y];
     NSString *first = [self getButtonTitle:firstButton];
-    if (! first) { return NO; }
+    if (! first) { NSLog(@"%i,%i blank", x, y); return NO; }
+    NSLog(@"%i,%i %@", x, y, first);
     
+    // others
     for (int xy = 1; xy < n; xy++) {
-        UIButton *otherButton = self.tiles[xy][n-1-xy];
+        x = xy;
+        y = n-1-xy;
+        UIButton *otherButton = self.tiles[x][y];
         NSString *other = [self getButtonTitle:otherButton];
         if ([other isEqualToString:first]) {
             // match: keep checking
+            NSLog(@"%i,%i %@ match", x, y, other);
         } else {
             // different: not a winner
+            NSLog(@"%i,%i %@ no", x, y, other);
             return NO;
         }
     }
     // all tiles matched: winner
+    NSLog(@"=> winning diag NE!");
     return YES;
 }
 
