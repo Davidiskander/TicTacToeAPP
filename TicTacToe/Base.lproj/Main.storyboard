@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -331,6 +331,26 @@
                                     <action selector="onGameStartPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S9F-Mb-VzZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nv4-lU-uUQ">
+                                <rect key="frame" x="40" y="429" width="17" height="30"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jrs-2K-d1Z" appends="YES" id="col-gR-8a0"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="O" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AZ-Pw-80I">
+                                <rect key="frame" x="541" y="429" width="19" height="30"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Pie-pD-yOv" appends="YES" id="657-nG-xE5"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -347,6 +367,7 @@
                             <constraint firstItem="AsX-9g-HAW" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="OzJ-BG-MqA"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UUX-1D-QeP" secondAttribute="bottom" id="QED-eR-3X2"/>
                             <constraint firstItem="dss-Y4-a30" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="QjE-3m-ToH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6AZ-Pw-80I" secondAttribute="trailing" constant="20" id="Qsp-gn-zfN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aZk-Vz-BRE" secondAttribute="trailing" constant="20" id="RDz-6x-THS"/>
                             <constraint firstItem="dss-Y4-a30" firstAttribute="top" secondItem="omf-P2-pGB" secondAttribute="bottom" constant="35" id="RFF-hX-Yjh"/>
                             <constraint firstItem="ugc-NO-5Fr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="SNh-bX-WVI"/>
@@ -357,11 +378,13 @@
                             <constraint firstItem="omf-P2-pGB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="dFN-es-zRb"/>
                             <constraint firstItem="omf-P2-pGB" firstAttribute="top" secondItem="9VI-E5-zWF" secondAttribute="bottom" constant="35" id="egZ-qb-tlB"/>
                             <constraint firstItem="1P8-J9-lq0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="geW-79-WwZ"/>
+                            <constraint firstItem="6AZ-Pw-80I" firstAttribute="top" secondItem="dss-Y4-a30" secondAttribute="bottom" constant="20" id="gsa-RS-783"/>
                             <constraint firstItem="aZk-Vz-BRE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="kp2-Dv-4Eq"/>
                             <constraint firstItem="aZk-Vz-BRE" firstAttribute="top" secondItem="1P8-J9-lq0" secondAttribute="bottom" constant="10" id="kym-yv-DjC"/>
                             <constraint firstItem="UUX-1D-QeP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="lbJ-Kh-Vfz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ALR-J8-d6r" secondAttribute="trailing" constant="20" id="mBO-wo-JAQ"/>
                             <constraint firstItem="1P8-J9-lq0" firstAttribute="top" secondItem="dss-Y4-a30" secondAttribute="bottom" constant="20" id="pMN-hO-ziv"/>
+                            <constraint firstItem="aZk-Vz-BRE" firstAttribute="top" secondItem="6AZ-Pw-80I" secondAttribute="bottom" constant="8" id="pTh-QD-uEp"/>
                             <constraint firstItem="9VI-E5-zWF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="r53-ur-gBp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AsX-9g-HAW" secondAttribute="bottom" constant="10" id="rYO-h7-hKA"/>
                             <constraint firstItem="9VI-E5-zWF" firstAttribute="top" secondItem="ALR-J8-d6r" secondAttribute="bottom" constant="35" id="tNh-Gw-rjL"/>
@@ -401,13 +424,17 @@
                         <outlet property="colomn3" destination="omf-P2-pGB" id="TnT-19-13S"/>
                         <outlet property="colomn4" destination="dss-Y4-a30" id="p2i-Cd-BwO"/>
                         <outlet property="gameMode" destination="1P8-J9-lq0" id="tsr-Na-m4n"/>
+                        <outlet property="oDrag" destination="6AZ-Pw-80I" id="oBz-sq-XAI"/>
                         <outlet property="resetButton" destination="AsX-9g-HAW" id="A5x-LB-psY"/>
                         <outlet property="startGame" destination="aZk-Vz-BRE" id="oIU-zs-g2e"/>
                         <outlet property="turnLabel" destination="ugc-NO-5Fr" id="2WB-Hv-79T"/>
                         <outlet property="winnerName" destination="hq3-Os-vxp" id="gXh-0R-Vra"/>
+                        <outlet property="xDrag" destination="Nv4-lU-uUQ" id="szE-Iu-33y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Pie-pD-yOv"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="jrs-2K-d1Z"/>
             </objects>
             <point key="canvasLocation" x="140" y="380"/>
         </scene>

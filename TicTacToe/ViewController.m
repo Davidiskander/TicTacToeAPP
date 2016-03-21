@@ -58,6 +58,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameMode;
 @property (weak, nonatomic) IBOutlet UIButton *startGame;
 
+@property (weak, nonatomic) IBOutlet UILabel *xDrag;
+@property (weak, nonatomic) IBOutlet UILabel *oDrag;
 
 @property NSArray *tiles;
 @property int numTiles;
@@ -72,17 +74,10 @@
 @implementation ViewController
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    self.colomn0.hidden = YES;
-    self.colomn1.hidden = YES;
-    self.colomn2.hidden = YES;
-    self.colomn3.hidden = YES;
-    self.colomn4.hidden = YES;
-
+    [self makeTilesDisappear];
     
     // initialize tile grid
     self.numTiles = 3;
@@ -102,8 +97,28 @@
     [self.startGame setHidden: NO];
 }
 
+// Hiding all tiles
+- (void) makeTilesDisappear{
+    self.colomn0.hidden = YES;
+    self.colomn1.hidden = YES;
+    self.colomn2.hidden = YES;
+    self.colomn3.hidden = YES;
+    self.colomn4.hidden = YES;
+}
+
+// Enable all tiles
+- (void) makeTilesAppear{
+    self.colomn0.hidden = NO;
+    self.colomn1.hidden = NO;
+    self.colomn2.hidden = NO;
+    self.colomn3.hidden = NO;
+    self.colomn4.hidden = NO;
+}
+
+
 - (IBAction)resetGame:(UIButton *)sender
 {
+    
     // clear tiles
     for (int x = 0; x < self.tiles.count; x++) {
         for (int y = 0; y < self.tiles.count; y++) {
@@ -115,9 +130,18 @@
             button.userInteractionEnabled = YES;
             
             // reset tile label
-            NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
+            //NSString *myName = [NSString stringWithFormat:@"%i, %i", x, y];
             [self setButtonTitle:button to:nil];
-            button.backgroundColor = [UIColor grayColor];
+            button.backgroundColor = [UIColor colorWithRed:210.0f/255.0f
+                                                     green:105.0f/255.0f
+                                                      blue:30.0f/255.0f
+                                                     alpha:1.0f];
+            
+            // enabling options
+            self.gameMode.enabled = YES;     // why?
+            [self.startGame setHidden: NO];  //why?
+            [self makeTilesDisappear];
+            
         }
     }
     
@@ -134,9 +158,23 @@
     // hide reset button
     [self.resetButton setHidden:YES];
     
-    // show game mode
-//    [self.startGame setHidden: NO];
-//    self.gameMode.enabled = YES;
+     //show game mode
+    [self.startGame setHidden: NO];
+    self.gameMode.enabled = YES;
+}
+
+
+
+// Drag and drop
+- (IBAction)panWasRecognized:(UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer translationInView:self.view.superview];
+    
+    CGPoint center = self.view.center;
+    center.x += translation.x;
+    center.y += translation.y;
+    self.view.center = center;
+    
+    [recognizer setTranslation:CGPointZero inView:self.view.superview];
 }
 
 
@@ -148,6 +186,8 @@
 - (IBAction)onGameStartPressed:(UIButton *)sender {
     self.startGame.hidden = YES;
     self.gameMode.enabled = NO;
+    //[self makeTilesAppear];
+
 
     if (self.gameMode.selectedSegmentIndex == 0) {
         NSLog(@"3x3");
@@ -155,9 +195,12 @@
         self.colomn0.hidden = NO;
         self.colomn1.hidden = NO;
         self.colomn2.hidden = NO;
+        self.colomn3.hidden = YES;
+        self.colomn4.hidden = YES;
+
         self.buttonD0.hidden = self.buttonD1.hidden = self.buttonD2.hidden = YES;
         self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = YES;
-        self.buttonE3.hidden = NO;
+        
     } else if(self.gameMode.selectedSegmentIndex == 1) {
         NSLog(@"4x4");
         self.numTiles = 4;
@@ -165,15 +208,17 @@
         self.colomn1.hidden = NO;
         self.colomn2.hidden = NO;
         self.colomn3.hidden = NO;
+        self.colomn4.hidden = YES;
         self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = self.buttonE3.hidden = YES;
+        self.buttonD0.hidden = self.buttonD1.hidden = self.buttonD2.hidden = self.buttonD2.hidden =  NO;
+
+        
     } else if(self.gameMode.selectedSegmentIndex == 2) {
         NSLog(@"5x5");
         self.numTiles = 5;
-        self.colomn0.hidden = NO;
-        self.colomn1.hidden = NO;
-        self.colomn2.hidden = NO;
-        self.colomn3.hidden = NO;
-        self.colomn4.hidden = NO;
+        [self makeTilesAppear];
+        self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = self.buttonE3.hidden = NO;
+
     }
 }
 
