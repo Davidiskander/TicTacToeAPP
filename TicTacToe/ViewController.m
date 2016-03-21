@@ -65,6 +65,8 @@
 @property int numTiles;
 @property BOOL isXTurn;
 
+//timer setup
+@property (strong, nonatomic) IBOutlet UILabel *timerlabel;
 
 @end
 
@@ -76,7 +78,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self makeTilesDisappear];
     
     // initialize tile grid
@@ -96,6 +97,31 @@
     // show start button
     [self.startGame setHidden: NO];
 }
+
+
+int hours, minutes, seconds;
+int secondsLeft;
+
+
+- (void)updateCounter:(NSTimer *)theTimer {
+    if(secondsLeft > 0 ) {
+        secondsLeft -- ;
+        hours = secondsLeft / 3600;
+        minutes = (secondsLeft % 3600) / 60;
+        seconds = (secondsLeft %3600) % 60;
+        self.timerlabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        NSLog(@"%i",secondsLeft);
+    } else {
+        secondsLeft = 60;
+    }
+}
+
+-(void)countdownTimer {
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
+    NSLog(@"%@",timer);
+}
+
+
 
 // Hiding all tiles
 - (void) makeTilesDisappear{
@@ -165,17 +191,17 @@
 
 
 
-// Drag and drop
-- (IBAction)panWasRecognized:(UIPanGestureRecognizer *)recognizer {
-    CGPoint translation = [recognizer translationInView:self.view.superview];
-    
-    CGPoint center = self.view.center;
-    center.x += translation.x;
-    center.y += translation.y;
-    self.view.center = center;
-    
-    [recognizer setTranslation:CGPointZero inView:self.view.superview];
-}
+//// Drag and drop
+//- (IBAction)panWasRecognized:(UIPanGestureRecognizer *)recognizer {
+//    CGPoint translation = [recognizer translationInView:self.view.superview];
+//    
+//    CGPoint center = self.view.center;
+//    center.x += translation.x;
+//    center.y += translation.y;
+//    self.view.center = center;
+//    
+//    [recognizer setTranslation:CGPointZero inView:self.view.superview];
+//}
 
 
 - (IBAction)gameModeButtonPressed:(UISegmentedControl *)sender {
@@ -186,7 +212,6 @@
 - (IBAction)onGameStartPressed:(UIButton *)sender {
     self.startGame.hidden = YES;
     self.gameMode.enabled = NO;
-    //[self makeTilesAppear];
 
 
     if (self.gameMode.selectedSegmentIndex == 0) {
@@ -218,6 +243,8 @@
         self.numTiles = 5;
         [self makeTilesAppear];
         self.buttonE0.hidden = self.buttonE1.hidden = self.buttonE2.hidden = self.buttonE3.hidden = NO;
+        self.buttonD0.hidden = self.buttonD1.hidden = self.buttonD2.hidden = self.buttonD2.hidden =  NO;
+
 
     }
 }
@@ -289,9 +316,17 @@
     }
 }
 
+
+
+
 - (void)changeTurn {
+    // start timer
+    secondsLeft = 60;
+    [self countdownTimer];
+    
     // increment turn
     self.isXTurn = ! self.isXTurn;
+    
 
     // set player label
     NSString *mark = [self playerMark];
@@ -460,7 +495,3 @@
 
 @end
 
-
-//to do list:
-// reseting the actual values of the buttons
-// color the buttons properly

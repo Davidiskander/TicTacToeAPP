@@ -21,7 +21,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange_bg" translatesAutoresizingMaskIntoConstraints="NO" id="UUX-1D-QeP">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugc-NO-5Fr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugc-NO-5Fr">
                                 <rect key="frame" x="20" y="40" width="580" height="21"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -351,6 +351,12 @@
                                     <outletCollection property="gestureRecognizers" destination="Pie-pD-yOv" appends="YES" id="657-nG-xE5"/>
                                 </connections>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxg-8I-1pi">
+                                <rect key="frame" x="40" y="40" width="520" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -377,6 +383,7 @@
                             <constraint firstItem="hq3-Os-vxp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="c2y-4q-uu5"/>
                             <constraint firstItem="omf-P2-pGB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="dFN-es-zRb"/>
                             <constraint firstItem="omf-P2-pGB" firstAttribute="top" secondItem="9VI-E5-zWF" secondAttribute="bottom" constant="35" id="egZ-qb-tlB"/>
+                            <constraint firstItem="Zxg-8I-1pi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="gEd-VJ-Na1"/>
                             <constraint firstItem="1P8-J9-lq0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="geW-79-WwZ"/>
                             <constraint firstItem="6AZ-Pw-80I" firstAttribute="top" secondItem="dss-Y4-a30" secondAttribute="bottom" constant="20" id="gsa-RS-783"/>
                             <constraint firstItem="aZk-Vz-BRE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="kp2-Dv-4Eq"/>
@@ -385,9 +392,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ALR-J8-d6r" secondAttribute="trailing" constant="20" id="mBO-wo-JAQ"/>
                             <constraint firstItem="1P8-J9-lq0" firstAttribute="top" secondItem="dss-Y4-a30" secondAttribute="bottom" constant="20" id="pMN-hO-ziv"/>
                             <constraint firstItem="aZk-Vz-BRE" firstAttribute="top" secondItem="6AZ-Pw-80I" secondAttribute="bottom" constant="8" id="pTh-QD-uEp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zxg-8I-1pi" secondAttribute="trailing" constant="20" id="psG-0X-gye"/>
                             <constraint firstItem="9VI-E5-zWF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="r53-ur-gBp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AsX-9g-HAW" secondAttribute="bottom" constant="10" id="rYO-h7-hKA"/>
                             <constraint firstItem="9VI-E5-zWF" firstAttribute="top" secondItem="ALR-J8-d6r" secondAttribute="bottom" constant="35" id="tNh-Gw-rjL"/>
+                            <constraint firstItem="Zxg-8I-1pi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="v1y-PL-ZqA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UUX-1D-QeP" secondAttribute="trailing" constant="-20" id="vgN-km-ARh"/>
                             <constraint firstItem="ALR-J8-d6r" firstAttribute="top" secondItem="8Rk-WF-ykz" secondAttribute="bottom" constant="35" id="xH1-ot-H9C"/>
                         </constraints>
@@ -427,6 +436,7 @@
                         <outlet property="oDrag" destination="6AZ-Pw-80I" id="oBz-sq-XAI"/>
                         <outlet property="resetButton" destination="AsX-9g-HAW" id="A5x-LB-psY"/>
                         <outlet property="startGame" destination="aZk-Vz-BRE" id="oIU-zs-g2e"/>
+                        <outlet property="timerlabel" destination="Zxg-8I-1pi" id="74P-Fe-PzI"/>
                         <outlet property="turnLabel" destination="ugc-NO-5Fr" id="2WB-Hv-79T"/>
                         <outlet property="winnerName" destination="hq3-Os-vxp" id="gXh-0R-Vra"/>
                         <outlet property="xDrag" destination="Nv4-lU-uUQ" id="szE-Iu-33y"/>

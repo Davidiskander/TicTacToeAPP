@@ -10,6 +10,13 @@
 
 @interface ViewController : UIViewController
 
+{
+NSTimer *timer;
+}
+
+-(void)updateCounter:(NSTimer *)theTimer;
+-(void)countdownTimer;
+
 
 @end
 
